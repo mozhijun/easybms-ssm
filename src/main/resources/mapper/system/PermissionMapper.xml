@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xmlvhy.easybms.system.dao.PermissionMapper">
+    <resultMap id="BaseResultMap" type="com.xmlvhy.easybms.system.entity.Permission">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="pid" jdbcType="INTEGER" property="pid"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="parent" jdbcType="INTEGER" property="parent"/>
+        <result column="percode" jdbcType="VARCHAR" property="percode"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="href" jdbcType="VARCHAR" property="href"/>
+        <result column="target" jdbcType="VARCHAR" property="target"/>
+        <result column="open" jdbcType="INTEGER" property="open"/>
+        <result column="ordernum" jdbcType="INTEGER" property="ordernum"/>
+        <result column="available" jdbcType="INTEGER" property="available"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+            id,
+            pid,
+            type,
+            parent,
+            percode,
+            name,
+            icon,
+            href,
+            target,
+            open,
+            ordernum,
+            available
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_permission
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from sys_permission
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.xmlvhy.easybms.system.entity.Permission">
+        insert into sys_permission (id, pid, type,
+                                    parent, percode, name,
+                                    icon, href, target,
+                                    open, ordernum, available)
+        values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR},
+                #{parent,jdbcType=INTEGER}, #{percode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+                #{icon,jdbcType=VARCHAR}, #{href,jdbcType=VARCHAR}, #{target,jdbcType=VARCHAR},
+                #{open,jdbcType=INTEGER}, #{ordernum,jdbcType=INTEGER}, #{available,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.xmlvhy.easybms.system.entity.Permission">
+        insert into sys_permission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="parent != null">
+                parent,
+            </if>
+            <if test="percode != null">
+                percode,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="icon != null">
+                icon,
+            </if>
+            <if test="href != null">
+                href,
+            </if>
+            <if test="target != null">
+                target,
+            </if>
+            <if test="open != null">
+                open,
+            </if>
+            <if test="ordernum != null">
+                ordernum,
+            </if>
+            <if test="available != null">
+                available,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="parent != null">
+                #{parent,jdbcType=INTEGER},
+            </if>
+            <if test="percode != null">
+                #{percode,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="href != null">
+                #{href,jdbcType=VARCHAR},
+            </if>
+            <if test="target != null">
+                #{target,jdbcType=VARCHAR},
+            </if>
+            <if test="open != null">
+                #{open,jdbcType=INTEGER},
+            </if>
+            <if test="ordernum != null">
+                #{ordernum,jdbcType=INTEGER},
+            </if>
+            <if test="available != null">
+                #{available,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xmlvhy.easybms.system.entity.Permission">
+        update sys_permission
+        <set>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="parent != null">
+                parent = #{parent,jdbcType=INTEGER},
+            </if>
+            <if test="percode != null">
+                percode = #{percode,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="href != null">
+                href = #{href,jdbcType=VARCHAR},
+            </if>
+            <if test="target != null">
+                target = #{target,jdbcType=VARCHAR},
+            </if>
+            <if test="open != null">
+                open = #{open,jdbcType=INTEGER},
+            </if>
+            <if test="ordernum != null">
+                ordernum = #{ordernum,jdbcType=INTEGER},
+            </if>
+            <if test="available != null">
+                available = #{available,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xmlvhy.easybms.system.entity.Permission">
+        update sys_permission
+        set pid       = #{pid,jdbcType=INTEGER},
+            type      = #{type,jdbcType=VARCHAR},
+            parent    = #{parent,jdbcType=INTEGER},
+            percode   = #{percode,jdbcType=VARCHAR},
+            name      = #{name,jdbcType=VARCHAR},
+            icon      = #{icon,jdbcType=VARCHAR},
+            href      = #{href,jdbcType=VARCHAR},
+            target    = #{target,jdbcType=VARCHAR},
+            open      = #{open,jdbcType=INTEGER},
+            ordernum  = #{ordernum,jdbcType=INTEGER},
+            available = #{available,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <!--获取菜单或权限-->
+    <select id="selectAllPermission" parameterType="com.xmlvhy.easybms.system.vo.PermissionVo"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_permission
+        <where>
+            <!--
+                根据id查询
+                1.当前查询的如果是type = menu 的时候，会把当前菜单或其子菜单都查询出来
+                2.当前查询的如果是type = permission 的时候，只会查询当前菜单下的所有权限点查询出来
+            -->
+            <if test="permissionVo.id != null">
+                and (id = #{permissionVo.id} or pid = #{permissionVo.id})
+            </if>
+            <!--根据名称查询-->
+            <if test="permissionVo.name != null">
+                and name like concat("%",#{permissionVo.name},"%")
+            </if>
+            <!--根据类型type=menu or type=permission-->
+            <if test="permissionVo.type != null">
+                and type = #{permissionVo.type}
+            </if>
+            <!--是否可用-->
+            <if test="permissionVo.available != null">
+                and available = #{permissionVo.available}
+            </if>
+            <!--根据权限编码模糊查询-->
+            <if test="permissionVo.percode != null">
+                and percode like concat("%",#{permissionVo.percode},"%")
+            </if>
+        </where>
+        order by ordernum
+    </select>
+    <!--计算是否存在相同菜单或者权限名称-->
+    <select id="countMenuByPidAndName" parameterType="map" resultType="int">
+        select count(1)
+        from sys_permission
+        where name = #{name}
+        <if test="id != null">
+            and id != #{id}
+        </if>
+        <if test="pId != null">
+            and pid = #{pId}
+        </if>
+    </select>
+    <!--计算菜单下子菜单或菜单下权限点的数量-->
+    <select id="countMenuByIdAndType" parameterType="com.xmlvhy.easybms.system.vo.PermissionVo" resultType="int">
+        select count(1)
+        from sys_permission
+        <where>
+            <if test="permissionVo.id != null">
+                pid = #{permissionVo.id}
+            </if>
+            <if test="permissionVo.type != null">
+                and type = #{permissionVo.type}
+            </if>
+        </where>
+    </select>
+    <!--根据父级菜单ID查询子菜单-->
+    <select id="selectAllChildMenuByPid" parameterType="map" resultType="com.xmlvhy.easybms.system.entity.Permission">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_permission
+        where pid = #{id} and type = #{type}
+    </select>
+
+    <!--根据角色ID查询对应所有可用的权限-->
+    <select id="selectPermissionsByRoleId" parameterType="map" resultMap="BaseResultMap">
+        select sp.*
+        from sys_permission sp
+                 inner join sys_role_permission srp
+                            on sp.id = srp.pid
+        where srp.rid = #{roleId}
+          and sp.available = #{available}
+    </select>
+
+    <!--根据用户ID查询对应所有菜单或权限-->
+    <select id="selectUserPermissionByUserId" parameterType="map" resultMap="BaseResultMap">
+        select distinct sp.* from sys_permission sp inner join sys_role_permission srp inner join sys_role_user sru
+        on (sp.id = srp.pid and srp.rid = sru.rid)
+        <where>
+            <if test="permissionVo.available != null">
+                sp.available = #{permissionVo.available}
+            </if>
+            <if test="permissionVo.type != null">
+                and sp.type = #{permissionVo.type}
+            </if>
+            <if test="userId != null">
+                and sru.uid = #{userId}
+            </if>
+        </where>
+    </select>
+
+</mapper>

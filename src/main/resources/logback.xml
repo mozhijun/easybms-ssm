@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/spring.log}"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+    <!-- 日志文件存放路径 -->
+    <property name="PATH" value="../logs/easybms"/>
+
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <Encoding>UTF-8</Encoding>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>[%date{yyyy-MM-dd HH:mm:ss}] [%-5level] [%logger:%line] --%mdc{client} %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <!-- 输出日志到file -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 正在记录的日志文件的路径及文件名 -->
+        <file>${PATH}/spring.log</file>
+        <append>true</append>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${PATH}/spring.log.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%date{yyyy-MM-dd HH:mm:ss}] [%-5level] [%logger:%line] --%mdc{client} %msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="org.springframework.web" level="DEBUG"></logger>
+    <!-- 默认 -->
+    <root level="INFO">
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

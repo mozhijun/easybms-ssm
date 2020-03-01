@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xmlvhy.easybms.system.dao.DeptMapper">
+    <resultMap id="BaseResultMap" type="com.xmlvhy.easybms.system.entity.Dept">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="pid" jdbcType="INTEGER" property="pid"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="open" jdbcType="INTEGER" property="open"/>
+        <result column="parent" jdbcType="INTEGER" property="parent"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="loc" jdbcType="VARCHAR" property="loc"/>
+        <result column="available" jdbcType="INTEGER" property="available"/>
+        <result column="ordernum" jdbcType="INTEGER" property="ordernum"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, pid, name, open, parent, remark, loc, available, ordernum
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dept
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from sys_dept
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.xmlvhy.easybms.system.entity.Dept">
+        insert into sys_dept (id, pid, name,
+        open, parent, remark,
+        loc, available, ordernum)
+        values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+        #{open,jdbcType=INTEGER}, #{parent,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},
+        #{loc,jdbcType=VARCHAR}, #{available,jdbcType=INTEGER}, #{ordernum,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.xmlvhy.easybms.system.entity.Dept">
+        insert into sys_dept
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="open != null">
+                open,
+            </if>
+            <if test="parent != null">
+                parent,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="loc != null">
+                loc,
+            </if>
+            <if test="available != null">
+                available,
+            </if>
+            <if test="ordernum != null">
+                ordernum,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="open != null">
+                #{open,jdbcType=INTEGER},
+            </if>
+            <if test="parent != null">
+                #{parent,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="loc != null">
+                #{loc,jdbcType=VARCHAR},
+            </if>
+            <if test="available != null">
+                #{available,jdbcType=INTEGER},
+            </if>
+            <if test="ordernum != null">
+                #{ordernum,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xmlvhy.easybms.system.entity.Dept">
+        update sys_dept
+        <set>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="open != null">
+                open = #{open,jdbcType=INTEGER},
+            </if>
+            <if test="parent != null">
+                parent = #{parent,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="loc != null">
+                loc = #{loc,jdbcType=VARCHAR},
+            </if>
+            <if test="available != null">
+                available = #{available,jdbcType=INTEGER},
+            </if>
+            <if test="ordernum != null">
+                ordernum = #{ordernum,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xmlvhy.easybms.system.entity.Dept">
+        update sys_dept
+        set pid = #{pid,jdbcType=INTEGER},
+        name = #{name,jdbcType=VARCHAR},
+        open = #{open,jdbcType=INTEGER},
+        parent = #{parent,jdbcType=INTEGER},
+        remark = #{remark,jdbcType=VARCHAR},
+        loc = #{loc,jdbcType=VARCHAR},
+        available = #{available,jdbcType=INTEGER},
+        ordernum = #{ordernum,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectAllDept" parameterType="com.xmlvhy.easybms.system.entity.Dept" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dept
+        <where>
+            <if test="dept.available != null">
+                and available = #{dept.available}
+            </if>
+            <if test="dept.remark != null">
+                and remark like concat("%",#{dept.remark},"%")
+            </if>
+            <if test="dept.loc != null">
+                and loc like concat("%",#{dept.loc},"%")
+            </if>
+            <if test="dept.name != null">
+                and name like concat("%",#{dept.name},"%")
+            </if>
+            <if test="dept.id != null">
+                and (id = #{dept.id} or pid = #{dept.id})
+            </if>
+        </where>
+        order by ordernum asc
+    </select>
+
+    <!--计算当前id对应的部门是否有子部门-->
+    <select id="countChildDeptById" parameterType="integer" resultType="int">
+        select count(1)
+        from sys_dept
+        where pid = #{id}
+    </select>
+    <!--计算同级部门相同名称的部门-->
+    <select id="countByNameAndParentId" parameterType="map" resultType="int">
+        select count(1)
+        from sys_dept
+        where name = #{name}
+        <if test="pid != null">
+           and pid = #{pid}
+        </if>
+        <if test="id != null">
+           and id != #{id}
+        </if>
+    </select>
+    <!--获取所有的子部门-->
+    <select id="selectDeptListByPid" parameterType="integer" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from sys_dept
+        where pid = #{id}
+    </select>
+</mapper>

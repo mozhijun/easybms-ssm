@@ -1,0 +1,48 @@
+{
+  "code": 0,
+  "msg": "获取信息成功",
+  "count": 1,
+  "data": [
+    {
+      "id": 1,
+      "searchValue": null,
+      "createBy": null,
+      "createTime": null,
+      "updateBy": null,
+      "updateTime": null,
+      "remark": null,
+      "params": {},
+      "sessionId": "75acd320-61ed-4533-96b1-140625a99071",
+      "deptName": "研发部门",
+      "loginName": "admin",
+      "ipAddr": "127.0.0.1",
+      "loginLocation": "内网IP",
+      "browserType": "Chrome",
+      "osName": "Windows 10",
+      "onlineUserLoginTime": "2019-07-27 08:43:29",
+      "lastAccessTime": "2019-07-27 08:43:39",
+      "expireTime": 1800000,
+      "status": 1,
+      "session": {
+        "id": null,
+        "startTimestamp": "2019-07-27 08:43:43",
+        "stopTimestamp": null,
+        "lastAccessTime": "2019-07-27 08:43:43",
+        "timeout": 1800000,
+        "expired": false,
+        "host": "127.0.0.1",
+        "attributes": null,
+        "userId": null,
+        "loginName": null,
+        "deptName": null,
+        "avatar": null,
+        "browser": "Chrome",
+        "os": "Windows 10",
+        "status": "on_line",
+        "attributeChanged": false,
+        "valid": true,
+        "attributeKeys": []
+      }
+    }
+  ]
+}

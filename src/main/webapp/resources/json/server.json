@@ -1,0 +1,78 @@
+{
+  "code": 0,
+  "msg": "获取信息成功",
+  "count": null,
+  "data": {
+    "cpuInfo": {
+      "cpuNum": 8,
+      "total": 800100.0,
+      "sys": 12.85,
+      "used": 18.95,
+      "wait": 0.0,
+      "free": 68.15
+    },
+    "diskInfoList": [
+      {
+        "diskName": "C:\\",
+        "diskTypeName": "NTFS",
+        "diskFileTypeName": "本地固定磁盘 (C:)",
+        "total": "107.4 GB",
+        "free": "16.6 GB",
+        "used": "90.9 GB",
+        "usage": 84.57
+      },
+      {
+        "diskName": "D:\\",
+        "diskTypeName": "NTFS",
+        "diskFileTypeName": "本地固定磁盘 (D:)",
+        "total": "331.5 GB",
+        "free": "277.8 GB",
+        "used": "53.7 GB",
+        "usage": 16.2
+      },
+      {
+        "diskName": "F:\\",
+        "diskTypeName": "NTFS",
+        "diskFileTypeName": "本地固定磁盘 (F:)",
+        "total": "300.0 GB",
+        "free": "55.5 GB",
+        "used": "244.5 GB",
+        "usage": 81.5
+      },
+      {
+        "diskName": "E:\\",
+        "diskTypeName": "NTFS",
+        "diskFileTypeName": "本地固定磁盘 (E:)",
+        "total": "300.0 GB",
+        "free": "260.6 GB",
+        "used": "39.4 GB",
+        "usage": 13.14
+      }
+    ],
+    "jvmInfo": {
+      "total": 967.5,
+      "max": 3616.0,
+      "free": 710.93,
+      "jdkVersion": "1.8.0_181",
+      "jdkHome": "C:\\Program Files\\Java\\jdk1.8.0_181\\jre",
+      "startTime": "2019-07-25 22:33:26",
+      "usage": 26.52,
+      "used": 256.57,
+      "jdkname": "Java HotSpot(TM) 64-Bit Server VM",
+      "runTime": "0天0小时1分钟"
+    },
+    "memoryInfo": {
+      "total": 15.89,
+      "used": 10.28,
+      "free": 5.61,
+      "usage": 64.71
+    },
+    "systemInfo": {
+      "serverName": "MyMateBook",
+      "serverIp": "192.168.56.1",
+      "projectDir": "E:\\apache-tomcat-8.5.34\\bin",
+      "osName": "Windows 10",
+      "osArch": "amd64"
+    }
+  }
+}

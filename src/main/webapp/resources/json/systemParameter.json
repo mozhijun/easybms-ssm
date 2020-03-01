@@ -1,0 +1,16 @@
+{
+	"cmsName": "EasyBMS",
+	"version": "v1.0",
+	"author": "小莫",
+	"homePage": "index.html",
+	"framework": "layui-2.4.5",
+	"feature": "零门槛 / 响应式 / 清爽 / 极简",
+	"server": "windows",
+	"dataBase": "8.00.2039",
+	"maxUpload": 1024,
+	"userRights": "超级管理员",
+	"description": "欢迎使用小莫EasyBMS",
+	"powerby": "copyright @2019 小莫",
+	"record": "沪ICP备8888号-1",
+	"keywords": "layui,小莫,EasyBMS,后台模版,请叫我小莫~~"
+}

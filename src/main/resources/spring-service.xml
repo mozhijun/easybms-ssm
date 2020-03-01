@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--扫描service 实现类下的包-->
+    <context:component-scan base-package="com.xmlvhy.easybms.system.service.impl"/>
+
+    <!--配置事务-->
+    <!--1.配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!--使用mybatis时候需要使用spring jdbc事务管理器 注入数据源-->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--2.配置事务传播特性-->
+    <tx:advice id="txAdvise" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!--name:就是切面里面的方法是以add开头的就使用事务
+                propagation
+                REQUIRED  如果当前没有事务，就新建一个事务，如果已经存在一个事务中，加入到这个事务中。这是最常见的选择。
+                SUPPORTS 支持当前事务，如果当前没有事务，就以非事务方式执行。
+                MANDATORY 使用当前的事务，如果当前没有事务，就抛出异常。
+                REQUIRES_NEW 新建事务，如果当前存在事务，把当前事务挂起。
+                NOT_SUPPORTED 以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。
+                NEVER 以非事务方式执行，如果当前存在事务，则抛出异常。
+                NESTED 如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与REQUIRED类 似的操作
+                read-only="true",只读事务，对数据库只能是查询操作
+		    -->
+            <tx:method name="add*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="modify*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="remove*" propagation="REQUIRED"/>
+            <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="del*" propagation="REQUIRED"/>
+            <tx:method name="get*" propagation="REQUIRED"/>
+            <tx:method name="reset*" propagation="REQUIRED"/>
+            <tx:method name="start*" propagation="REQUIRED"/>
+            <tx:method name="complete*" propagation="REQUIRED"/>
+            <tx:method name="query*" read-only="true"/>
+            <tx:method name="select*" read-only="true"/>
+            <tx:method name="*" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--也可以采用在代码中使用注解的方式来进行对事务的管理，这时候可以不需要配第2步骤，但是需要配置事务注解驱动-->
+    <!--<tx:annotation-driven/>-->
+
+    <!--druid配置-->
+    <bean id="statFilter" class="com.alibaba.druid.filter.stat.StatFilter">
+        <property name="slowSqlMillis" value="3000"/>
+        <property name="logSlowSql" value="true"/>
+        <property name="mergeSql" value="true"/>
+    </bean>
+    <bean id="wallFilter" class="com.alibaba.druid.wall.WallFilter">
+        <property name="dbType" value="mysql"/>
+    </bean>
+</beans>

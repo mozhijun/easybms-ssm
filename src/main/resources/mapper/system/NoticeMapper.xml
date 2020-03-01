@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xmlvhy.easybms.system.dao.NoticeMapper">
+    <resultMap id="BaseResultMap" type="com.xmlvhy.easybms.system.entity.Notice">
+        <id column="notice_id" jdbcType="INTEGER" property="noticeId"/>
+        <result column="notice_title" jdbcType="VARCHAR" property="noticeTitle"/>
+        <result column="notice_content" jdbcType="VARCHAR" property="noticeContent"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="notice_type" jdbcType="TINYINT" property="noticeType"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+            notice_id,
+            notice_title,
+            notice_content,
+            create_time,
+            create_by,
+            notice_type,
+            update_by,
+            update_time,
+            remark,
+            status
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_notice
+        where notice_id = #{noticeId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from sys_notice
+        where notice_id = #{noticeId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.xmlvhy.easybms.system.entity.Notice">
+        insert into sys_notice (notice_id, notice_title, notice_content,
+                                create_time, create_by, notice_type,
+                                update_by, update_time, remark,
+                                status)
+        values (#{noticeId,jdbcType=INTEGER}, #{noticeTitle,jdbcType=VARCHAR}, #{noticeContent,jdbcType=VARCHAR},
+                #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{noticeType,jdbcType=TINYINT},
+                #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR},
+                #{status,jdbcType=TINYINT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.xmlvhy.easybms.system.entity.Notice">
+        insert into sys_notice
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="noticeId != null">
+                notice_id,
+            </if>
+            <if test="noticeTitle != null">
+                notice_title,
+            </if>
+            <if test="noticeContent != null">
+                notice_content,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="noticeType != null">
+                notice_type,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="noticeId != null">
+                #{noticeId,jdbcType=INTEGER},
+            </if>
+            <if test="noticeTitle != null">
+                #{noticeTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeContent != null">
+                #{noticeContent,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeType != null">
+                #{noticeType,jdbcType=TINYINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xmlvhy.easybms.system.entity.Notice">
+        update sys_notice
+        <set>
+            <if test="noticeTitle != null">
+                notice_title = #{noticeTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeContent != null">
+                notice_content = #{noticeContent,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeType != null">
+                notice_type = #{noticeType,jdbcType=TINYINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+        </set>
+        where notice_id = #{noticeId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xmlvhy.easybms.system.entity.Notice">
+        update sys_notice
+        set notice_title   = #{noticeTitle,jdbcType=VARCHAR},
+            notice_content = #{noticeContent,jdbcType=VARCHAR},
+            create_time    = #{createTime,jdbcType=TIMESTAMP},
+            create_by      = #{createBy,jdbcType=VARCHAR},
+            notice_type    = #{noticeType,jdbcType=TINYINT},
+            update_by      = #{updateBy,jdbcType=VARCHAR},
+            update_time    = #{updateTime,jdbcType=TIMESTAMP},
+            remark         = #{remark,jdbcType=VARCHAR},
+            status         = #{status,jdbcType=TINYINT}
+        where notice_id = #{noticeId,jdbcType=INTEGER}
+    </update>
+    <!--根据条件查询公告列表-->
+    <select id="selectAllNoticeByParams" parameterType="com.xmlvhy.easybms.system.vo.NoticeVo"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_notice
+        <where>
+            <if test="noticeVo.noticeTitle != null and noticeVo.noticeTitle != ''">
+                notice_title like concat("%",#{noticeVo.noticeTitle},"%")
+            </if>
+            <if test="noticeVo.createBy != null and noticeVo.createBy != ''">
+                and create_by like concat("%",#{noticeVo.createBy},"%")
+            </if>
+            <if test="noticeVo.startTime != null">
+                and create_time &gt;= #{noticeVo.startTime}
+            </if>
+            <if test="noticeVo.endTime != null">
+                and create_time &lt;= #{noticeVo.endTime}
+            </if>
+        </where>
+    </select>
+</mapper>

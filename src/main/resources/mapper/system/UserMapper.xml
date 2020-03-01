@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xmlvhy.easybms.system.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.xmlvhy.easybms.system.entity.User">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="loginname" jdbcType="VARCHAR" property="loginname"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="sex" jdbcType="INTEGER" property="sex"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="pwd" jdbcType="VARCHAR" property="pwd"/>
+        <result column="deptid" jdbcType="INTEGER" property="deptid"/>
+        <result column="hiredate" jdbcType="TIMESTAMP" property="hiredate"/>
+        <result column="mgr" jdbcType="INTEGER" property="mgr"/>
+        <result column="available" jdbcType="INTEGER" property="available"/>
+        <result column="ordernum" jdbcType="INTEGER" property="ordernum"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="imgpath" jdbcType="VARCHAR" property="imgpath"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+            id,
+            name,
+            loginname,
+            address,
+            sex,
+            remark,
+            pwd,
+            deptid,
+            hiredate,
+            mgr,
+            available,
+            ordernum,
+            type,
+            imgpath,
+            salt
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from sys_user
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.xmlvhy.easybms.system.entity.User">
+        insert into sys_user (id, name, loginname,
+                              address, sex, remark,
+                              pwd, deptid, hiredate,
+                              mgr, available, ordernum,
+                              type, imgpath, salt)
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{loginname,jdbcType=VARCHAR},
+                #{address,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},
+                #{pwd,jdbcType=VARCHAR}, #{deptid,jdbcType=INTEGER}, #{hiredate,jdbcType=TIMESTAMP},
+                #{mgr,jdbcType=INTEGER}, #{available,jdbcType=INTEGER}, #{ordernum,jdbcType=INTEGER},
+                #{type,jdbcType=INTEGER}, #{imgpath,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.xmlvhy.easybms.system.entity.User">
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="loginname != null">
+                loginname,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="pwd != null">
+                pwd,
+            </if>
+            <if test="deptid != null">
+                deptid,
+            </if>
+            <if test="hiredate != null">
+                hiredate,
+            </if>
+            <if test="mgr != null">
+                mgr,
+            </if>
+            <if test="available != null">
+                available,
+            </if>
+            <if test="ordernum != null">
+                ordernum,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="imgpath != null">
+                imgpath,
+            </if>
+            <if test="salt != null">
+                salt,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="loginname != null">
+                #{loginname,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="pwd != null">
+                #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="deptid != null">
+                #{deptid,jdbcType=INTEGER},
+            </if>
+            <if test="hiredate != null">
+                #{hiredate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="mgr != null">
+                #{mgr,jdbcType=INTEGER},
+            </if>
+            <if test="available != null">
+                #{available,jdbcType=INTEGER},
+            </if>
+            <if test="ordernum != null">
+                #{ordernum,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="imgpath != null">
+                #{imgpath,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                #{salt,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xmlvhy.easybms.system.entity.User">
+        update sys_user
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="loginname != null">
+                loginname = #{loginname,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="pwd != null">
+                pwd = #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="deptid != null">
+                deptid = #{deptid,jdbcType=INTEGER},
+            </if>
+            <if test="hiredate != null">
+                hiredate = #{hiredate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="mgr != null">
+                mgr = #{mgr,jdbcType=INTEGER},
+            </if>
+            <if test="available != null">
+                available = #{available,jdbcType=INTEGER},
+            </if>
+            <if test="ordernum != null">
+                ordernum = #{ordernum,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="imgpath != null">
+                imgpath = #{imgpath,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                salt = #{salt,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xmlvhy.easybms.system.entity.User">
+        update sys_user
+        set name      = #{name,jdbcType=VARCHAR},
+            loginname = #{loginname,jdbcType=VARCHAR},
+            address   = #{address,jdbcType=VARCHAR},
+            sex       = #{sex,jdbcType=INTEGER},
+            remark    = #{remark,jdbcType=VARCHAR},
+            pwd       = #{pwd,jdbcType=VARCHAR},
+            deptid    = #{deptid,jdbcType=INTEGER},
+            hiredate  = #{hiredate,jdbcType=TIMESTAMP},
+            mgr       = #{mgr,jdbcType=INTEGER},
+            available = #{available,jdbcType=INTEGER},
+            ordernum  = #{ordernum,jdbcType=INTEGER},
+            type      = #{type,jdbcType=INTEGER},
+            imgpath   = #{imgpath,jdbcType=VARCHAR},
+            salt      = #{salt,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--自定义map,封装查询结果,todo:当然这里如果不额外添加属性直接返回resultType="map"也可以-->
+    <resultMap extends="BaseResultMap" id="MyResultMap"  type="com.xmlvhy.easybms.system.entity.User">
+        <result column="deptname" property="deptname" jdbcType="VARCHAR" />
+        <result column="leadername" property="leadername" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!--根据登录名查询用户-->
+    <select id="queryUserByLoginName" parameterType="string" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        where loginname = #{loginName}
+    </select>
+    <!--计算当前部门下员工数-->
+    <select id="countUserByDeptId" parameterType="integer" resultType="int">
+        select count(1)
+        from sys_user
+        where deptid = #{deptId}
+    </select>
+    <!--根据条件查询用户：包括所在部门 上级领导等-->
+    <select id="selectAllUsersByParams" parameterType="com.xmlvhy.easybms.system.vo.UserVo" resultMap="MyResultMap">
+        select su3.*,sd.name 'deptname' from
+        (select su1.*,su2.name 'leadername' from sys_user su1 left join sys_user su2 on su1.mgr = su2.id
+        where su1.type != 0) su3
+        inner join sys_dept sd
+        on su3.deptid = sd.id
+        <where>
+            <!--根据用户名模糊查询-->
+            <if test="userVo.name != null">
+                and su3.name like concat("%",#{userVo.name},"%")
+            </if>
+            <!--根据用户地址模糊查询-->
+            <if test="userVo.address != null">
+                and su3.address like concat("%",#{userVo.address},"%")
+            </if>
+            <!--根据用户备注模糊查询-->
+            <if test="userVo.remark != null">
+                and su3.remark like concat("%",#{userVo.remark},"%")
+            </if>
+            <!--根据部门ID查询-->
+            <if test="userVo.deptid != null">
+                and su3.deptid = #{userVo.deptid}
+            </if>
+        </where>
+        order by su3.ordernum
+    </select>
+    <!--根据部门ID查询普通可用的用户-->
+    <select id="selectUserByDeptId" resultType="map" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from sys_user
+        where deptid = #{deptId}
+        and available = #{available}
+        and type = #{userType}
+    </select>
+    <!--根据用户ID,计算下属数目-->
+    <select id="countUserById" parameterType="integer" resultType="int">
+        select count(1)
+        from sys_user
+        where mgr = #{id}
+    </select>
+    <!--根据用户ID，查询其所有下属-->
+    <select id="selectUserByMgr" parameterType="integer" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from sys_user
+        where mgr = #{id}
+    </select>
+    <!--获取所有用户列表-->
+    <select id="selectAllUsers" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from sys_user
+    </select>
+    <!--根据用户ID重置密码-->
+    <update id="updateUserPwd" parameterType="map">
+        update sys_user
+        set pwd = #{newPwd}
+        where id = #{userId}
+    </update>
+    <!--根据用户登录名查询用户，TODO:登录名唯一-->
+    <select id="selectUserByLoginName" parameterType="string" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from sys_user
+        where loginname = #{loginName}
+    </select>
+</mapper>

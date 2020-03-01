@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--环境配置-->
+    <context id="mybatis" targetRuntime="MyBatis3">
+        <!--是否生成注释-->
+        <commentGenerator>
+            <!--不生成注释-->
+            <property name="suppressAllComments" value="true"></property>
+        </commentGenerator>
+        <!--数据库链接URL、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/easybms-demo"
+                        userId="mzj"
+                        password="mzj584wanlhy">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <!--不适用BigDecimal ，如果设置为true Mybatis中所有的数字类型统一会被设置为BigDecimal（大数字）
+                false的时候，则根据数据库字段类型动态生成对应的Integer、Long、Double、Float
+            -->
+            <property name="forceBigDecimals" value="false"></property>
+        </javaTypeResolver>
+        <!--实体类生成的设置-->
+        <javaModelGenerator targetPackage="com.xmlvhy.easybms.system.entity"
+                            targetProject="E:\dev_project\easybms\src\main\java">
+            <!-- 根据包名自动生成对应的目录 -->
+            <property name="enableSubPackages" value="true"></property>
+            <property name="trimStrings" value="true"></property>
+        </javaModelGenerator>
+        <!--生成 mapper XML -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="E:\dev_project\easybms\src\main\resources">
+            <property name="enableSubPackages" value="true"></property>
+        </sqlMapGenerator>
+        <!-- Mapper接口的设置 XMLMAPPER ，代表生成xml文件-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.xmlvhy.easybms.system.dao"
+                             targetProject="E:\dev_project\easybms\src\main\java">
+            <property name="enableSubPackages" value="true"></property>
+        </javaClientGenerator>
+
+        <!-- 要生成哪些表(更改tableName和domainObjectName就可以) --><!-- 6 -->
+        <!--<table tableName="sys_user" domainObjectName="User" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <table tableName="sys_notice" domainObjectName="Notice" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
+        <!--<table tableName="sys_permission" domainObjectName="Permission" enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>-->
+        <!--<table tableName="sys_role" domainObjectName="Role" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--<table tableName="sys_role_permission" domainObjectName="RolePermission" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--<table tableName="sys_role_user" domainObjectName="RoleUser" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--<table tableName="sys_dept" domainObjectName="Dept" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--<table tableName="sys_leavebill" domainObjectName="LeaveBill" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--<table tableName="sys_log_login" domainObjectName="LogLogin" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+
+        <!--<table tableName="sys_acl_module" domainObjectName="AclModule" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--<table tableName="sys_log" domainObjectName="SysLog" enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">-->
+            <!--<columnOverride column="old_value" javaType="java.lang.String" jdbcType="VARCHAR"/>-->
+            <!--<columnOverride column="new_value" javaType="java.lang.String" jdbcType="VARCHAR"/>-->
+        <!--</table>-->
+               
+    </context>
+</generatorConfiguration>

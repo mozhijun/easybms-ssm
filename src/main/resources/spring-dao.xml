@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--读取数据源配置文件-->
+    <context:property-placeholder location="classpath:dataSource.properties"/>
+
+    <!--使用 druid 数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="initialSize" value="5"/>
+        <property name="maxActive" value="100"/>
+        <property name="minIdle" value="10"/>
+        <property name="maxWait" value="6000"/>
+        <property name="filters" value="stat,wall"/>
+    </bean>
+
+    <!--创建SqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--注入数据源-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--加载mybatis的全局配置文件-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--mapper 映射文件-->
+        <property name="mapperLocations">
+            <array>
+                <value>classpath:mapper/system/*.xml</value>
+            </array>
+        </property>
+        <!--实体类别名-->
+        <property name="typeAliasesPackage" value="com.xmlvhy.easybms.system.entity,
+        com.xmlvhy.easybms.business.entity,com.xmlvhy.easybms.system.vo"/>
+        <!--配置pageHelper分页插件-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                            <!-- 配置数据库言 4.0之后的PageHepler可以不用配置 -->
+                            helperdialect=mysql
+                            <!-- 配置分页的出处理 如果数据库里面有10页，用户传-1页 此时会查询第一页 如果用户传15页，会查询最后一页 -->
+                            reasonable=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <!--配置mapper扫描的接口所在的包名，spring 会自动查找之中的类-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--注入SqlSessionFactoryBean-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!--注入扫描包的路径 如果有多个包 value="com.xmlvhy.easybms.business.dao,com.xmlvhy.easybms.system.dao"
+        或者 <value> com.xmlvhy.easybms.business.dao com.xmlvhy.easybms.system.dao </value>-->
+        <property name="basePackage" value="com.xmlvhy.easybms.business.dao,com.xmlvhy.easybms.system.dao"/>
+    </bean>
+
+</beans>

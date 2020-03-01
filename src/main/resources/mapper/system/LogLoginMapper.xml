@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xmlvhy.easybms.system.dao.LogLoginMapper">
+    <resultMap id="BaseResultMap" type="com.xmlvhy.easybms.system.entity.LogLogin">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="login_name" jdbcType="VARCHAR" property="loginName"/>
+        <result column="login_ip" jdbcType="VARCHAR" property="loginIp"/>
+        <result column="login_time" jdbcType="TIMESTAMP" property="loginTime"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="device" jdbcType="VARCHAR" property="device"/>
+        <result column="browser_type" jdbcType="VARCHAR" property="browserType"/>
+        <result column="os_name" jdbcType="VARCHAR" property="osName"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+            id,
+            login_name,
+            login_ip,
+            login_time,
+            name,
+            device,
+            browser_type,
+            os_name
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_log_login
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from sys_log_login
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.xmlvhy.easybms.system.entity.LogLogin">
+        insert into sys_log_login (id, login_name, login_ip,
+                                   login_time, name, device,
+                                   browser_type, os_name)
+        values (#{id,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, #{loginIp,jdbcType=VARCHAR},
+                #{loginTime,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}, #{device,jdbcType=VARCHAR},
+                #{browserType,jdbcType=VARCHAR}, #{osName,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.xmlvhy.easybms.system.entity.LogLogin">
+        insert into sys_log_login
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="loginName != null">
+                login_name,
+            </if>
+            <if test="loginIp != null">
+                login_ip,
+            </if>
+            <if test="loginTime != null">
+                login_time,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="device != null">
+                device,
+            </if>
+            <if test="browserType != null">
+                browser_type,
+            </if>
+            <if test="osName != null">
+                os_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="loginName != null">
+                #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="loginIp != null">
+                #{loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="loginTime != null">
+                #{loginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="device != null">
+                #{device,jdbcType=VARCHAR},
+            </if>
+            <if test="browserType != null">
+                #{browserType,jdbcType=VARCHAR},
+            </if>
+            <if test="osName != null">
+                #{osName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.xmlvhy.easybms.system.entity.LogLogin">
+        update sys_log_login
+        <set>
+            <if test="loginName != null">
+                login_name = #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="loginIp != null">
+                login_ip = #{loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="loginTime != null">
+                login_time = #{loginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="device != null">
+                device = #{device,jdbcType=VARCHAR},
+            </if>
+            <if test="browserType != null">
+                browser_type = #{browserType,jdbcType=VARCHAR},
+            </if>
+            <if test="osName != null">
+                os_name = #{osName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.xmlvhy.easybms.system.entity.LogLogin">
+        update sys_log_login
+        set login_name   = #{loginName,jdbcType=VARCHAR},
+            login_ip     = #{loginIp,jdbcType=VARCHAR},
+            login_time   = #{loginTime,jdbcType=TIMESTAMP},
+            name         = #{name,jdbcType=VARCHAR},
+            device       = #{device,jdbcType=VARCHAR},
+            browser_type = #{browserType,jdbcType=VARCHAR},
+            os_name      = #{osName,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectAllLoginLogByParams" parameterType="com.xmlvhy.easybms.system.vo.LogLoginVo"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_log_login
+        <where>
+            <if test="logLoginVo.loginName != null">
+                login_name like concat("%",#{logLoginVo.loginName},"%")
+            </if>
+            <if test="logLoginVo.name != null">
+                and name like concat("%",#{logLoginVo.name},"%")
+            </if>
+            <if test="logLoginVo.startTime != null">
+                and login_time &gt;= #{logLoginVo.startTime}
+            </if>
+            <if test="logLoginVo.endTime != null">
+                and login_time &lt;= #{logLoginVo.endTime}
+            </if>
+        </where>
+        order by login_time DESC
+    </select>
+</mapper>
