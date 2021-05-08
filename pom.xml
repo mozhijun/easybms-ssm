@@ -20,7 +20,7 @@
         <fileupload.version>1.3.3</fileupload.version>
         <pagehelper.version>5.1.2</pagehelper.version>
         <!-- 配置shiro的配置 -->
-        <shiro.version>1.5.1</shiro.version>
+        <shiro.version>1.6.0</shiro.version>
         <!-- 中文转拼音的jar包版本 -->
         <pinyin4j.version>2.5.0</pinyin4j.version>
 
